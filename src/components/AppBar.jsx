@@ -8,6 +8,7 @@ import theme from './../theme';
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
+    marginBottom: 16,
     height: 120,
     backgroundColor: theme.colors.appBarBackGround,
     display: 'flex',
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = ({ tabTitle }) => {
-  console.log(tabTitle);
   return (
     <View style={styles.container}>
       <AppBarTab tabTitle={tabTitle}/>

@@ -16,6 +16,12 @@ const theme = {
     normal: '400',
     bold: '700',
   },
+  images: {
+    ownerAvatar: {
+      width: 112,
+      height: 112
+    }
+  }
 };
 
 export default theme;
