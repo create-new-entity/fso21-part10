@@ -1,5 +1,5 @@
-import { StyleSheet, Text, Pressable } from 'react-native';
-import { useNavigate } from 'react-router-native';
+import { StyleSheet, Text } from 'react-native';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,11 +13,10 @@ const styles = StyleSheet.create({
 });
 
 const AppBarTab = ({ tabTitle, to }) => {
-  const navigate = useNavigate();
   return (
-    <Pressable style={styles.container} onPress={() => navigate(to, { replace: true })}>
+    <Link style={styles.container} to={to}>
       <Text style={styles.title}>{tabTitle}</Text>
-    </Pressable>
+    </Link>
   );
 };
 
