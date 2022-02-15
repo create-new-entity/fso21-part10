@@ -20,11 +20,11 @@ const SubDetail = ({ numberDtl, title }) => {
   return (
     <View style={styles.container}>
       <Text
-        color='primary'
         fontSize='body'
+        fontWeight='bold'
       >{numberDtl}</Text>
       <Text
-        color='secondary'
+        color='textSecondary'
         fontSize='subheading'
       >{title}</Text>
     </View>

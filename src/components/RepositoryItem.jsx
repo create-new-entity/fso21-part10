@@ -71,7 +71,7 @@ const RepositoryItem = ({ item }) => {
         <View style={styles.repoDetails}>
           <Text fontWeight="bold">{item.fullName}</Text>
           <Text
-            color='secondary'
+            color='textSecondary'
             fontSize='subheading'
             numberOfLines={2}
             style={styles.subHeading}
