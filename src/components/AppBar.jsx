@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = ({ tabTitle }) => {
-  console.log(tabTitle);
   return (
     <View style={styles.container}>
       <AppBarTab tabTitle={tabTitle}/>

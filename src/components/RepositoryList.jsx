@@ -4,6 +4,7 @@ import RepositoryItem from './RepositoryItem';
 const styles = StyleSheet.create({
   separator: {
     height: 10,
+    backgroundColor: '#e1e4e8'
   },
 });
 
@@ -58,7 +59,21 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
 
-  const renderItem = ({ item }) => <RepositoryItem item={item}/>;
+  const renderItem = ({ item }) => {
+    const subDetails = [
+      { key: 'stargazersCount', title: 'Stars' },
+      { key: 'forksCount', title: 'Forks' },
+      { key: 'reviewCount', title: 'Reviews' },
+      { key: 'ratingAverage', title: 'Rating' }];
+    
+    const getFormattedNumber = (num) => {
+      if(num < 1000) return num;
+      return `${Math.trunc(Math.round((num / 1000) * 10)) / 10}k`;
+    };
+
+    item.subDetails = subDetails.map((subDtls) => ({ numberDtl: getFormattedNumber(item[subDtls.key]), title: subDtls.title}))
+    return <RepositoryItem item={item}/>;
+  };
 
   return (
     <FlatList
