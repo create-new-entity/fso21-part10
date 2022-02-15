@@ -18,8 +18,9 @@ const theme = {
   },
   images: {
     ownerAvatar: {
-      width: 112,
-      height: 112
+      width: 50,
+      height: 50,
+      borderRadius: 8
     }
   }
 };
