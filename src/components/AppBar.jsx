@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppBar = ({ tabTitle }) => {
+const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab tabTitle={tabTitle}/>
+      <AppBarTab tabTitle='Repositories' to='/'/>
+      <AppBarTab tabTitle='Sign In' to='/signin'/>
     </View>
   );
 };
