@@ -66,7 +66,12 @@ const RepositoryList = () => {
       { key: 'reviewCount', title: 'Reviews' },
       { key: 'ratingAverage', title: 'Rating' }];
     
-    item.subDetails = subDetails.map((subDtls) => ({ numberDtl: item[subDtls.key], title: subDtls.title}))
+    const getFormattedNumber = (num) => {
+      if(num < 1000) return num;
+      return `${Math.trunc(Math.round((num / 1000) * 10)) / 10}k`;
+    };
+
+    item.subDetails = subDetails.map((subDtls) => ({ numberDtl: getFormattedNumber(item[subDtls.key]), title: subDtls.title}))
     return <RepositoryItem item={item}/>;
   };
 

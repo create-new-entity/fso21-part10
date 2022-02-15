@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import { View, Image, StyleSheet, FlatList } from 'react-native';
 
@@ -27,8 +28,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
-    paddingRight: 32,
-    paddingLeft: 16
+    paddingLeft: 16,
+    paddingRight: 32
   },
 
   subHeading: {
@@ -83,6 +84,7 @@ const RepositoryItem = ({ item }) => {
         data={item.subDetails}
         renderItem={renderSubDetail}
         style={styles.subDetailsContainer}
+        keyExtractor={() => uuidv4()}
       />
     </View>
   );
