@@ -7,6 +7,19 @@ import SubDetail from './SubDetail';
 
 import theme from './../theme';
 
+const max = 1000;
+const takenIds = [];
+
+const getDummyId = () => {
+  let newId;
+  while(true) {
+    newId = Math.floor(Math.random() * max);
+    if(!takenIds.includes(newId)) break;
+  }
+  takenIds.push(newId);
+  return newId;
+}
+
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
@@ -84,7 +97,7 @@ const RepositoryItem = ({ item }) => {
         data={item.subDetails}
         renderItem={renderSubDetail}
         style={styles.subDetailsContainer}
-        keyExtractor={() => uuidv4()}
+        keyExtractor={getDummyId}
       />
     </View>
   );
