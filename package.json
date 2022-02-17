@@ -19,7 +19,8 @@
     "react-native": "0.64.3",
     "react-native-web": "0.17.1",
     "react-router-native": "^6.2.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
