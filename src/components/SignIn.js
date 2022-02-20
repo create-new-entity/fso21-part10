@@ -1,4 +1,5 @@
 import { Pressable, View, StyleSheet } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -37,12 +38,13 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [signIn] = useSignIn();
 
   const onSubmit = async ({ username, password }) => {
     try {
-      const { data } = await signIn({ username, password });
-      console.log('accessToken', data.authenticate.accessToken);
+      await signIn({ username, password });
+      navigate('/');
     }
     catch(err) {
       console.log('Something went wrong...');
