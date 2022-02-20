@@ -7,6 +7,8 @@ import Text from './Text';
 
 import theme from '../theme';
 
+import useSignIn from './../hooks/useSignIn';
+
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
@@ -35,7 +37,17 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
-  const onSubmit = (values) => console.log(values);
+  const [signIn] = useSignIn();
+
+  const onSubmit = async ({ username, password }) => {
+    try {
+      const { data } = await signIn({ username, password });
+      console.log('accessToken', data.authenticate.accessToken);
+    }
+    catch(err) {
+      console.log('Something went wrong...');
+    }
+  };
 
   const initialValues = {
     username: '',
