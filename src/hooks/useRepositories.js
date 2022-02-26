@@ -8,7 +8,7 @@ const useRepositories = () => {
   });
 
   if(!loading && !error) {
-    return data.repositories.edges.map(edgeObj => {
+    const repositories = data.repositories.edges.map(edgeObj => {
       return {
         id: edgeObj.node.id,
         fullName: edgeObj.node.fullName,
@@ -21,9 +21,11 @@ const useRepositories = () => {
         ownerAvatarUrl: edgeObj.node.ownerAvatarUrl
       };
     });
+    
+    return { repositories };
   }
 
-  return [];
+  return {};
 };
 
 export default useRepositories;
