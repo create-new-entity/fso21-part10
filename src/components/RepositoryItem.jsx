@@ -73,7 +73,7 @@ const RepositoryItem = ({ item }) => {
   const renderSubDetail = ({ item }) => <SubDetail key={item.title} numberDtl={item.numberDtl} title={item.title}/>
 
   return (
-    <View style={styles.container}>
+    <View testID='repositoryItem' style={styles.container}>
       <View style={styles.repoDetailContainer}>
         <Image
           style={styles.tinyLogo}
