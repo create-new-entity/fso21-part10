@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 
 import useRepositories from './../hooks/useRepositories.js';
+import useDetailItemStorage from './../hooks/useDetailItemStorage.js';
 
 const styles = StyleSheet.create({
   separator: {
@@ -43,6 +45,13 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
+  const detailItemStorage = useDetailItemStorage();
+
+  useEffect(() => {
+    (async () => {
+      await detailItemStorage.removeDetailItem();
+    })();
+  });
 
   return <RepositoryListContainer repositories={repositories} />;
 };

@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-native';
 import { View, Image, StyleSheet, FlatList, Pressable } from 'react-native';
 
@@ -58,13 +57,6 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
 
-  subDetailsContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingTop: 8
-  },
-
   tinyLogo: {
     ...theme.images.ownerAvatar
   },
@@ -84,8 +76,22 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryItem = ({ item, showURLBtn }) => {
+  const [clickedItem, setClickedItem] = useState();
   const detailItemStorage = useDetailItemStorage();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    (async () => {
+      if(!showURLBtn) return;
+      const storedItem = await detailItemStorage.getDetailItem();
+      setClickedItem(storedItem);
+    })();
+  }, [showURLBtn]);
+
+  if(showURLBtn){
+    if(clickedItem) item = clickedItem;
+    else return null;
+  }
 
   const renderSubDetail = ({ item }) => <SubDetail key={item.title} numberDtl={item.numberDtl} title={item.title}/>
   
@@ -119,13 +125,15 @@ const RepositoryItem = ({ item, showURLBtn }) => {
             <Text style={styles.languageTag}>{item.language}</Text>
           </View>
         </View>
+        
         <FlatList
           data={item.subDetails}
           renderItem={renderSubDetail}
-          style={styles.subDetailsContainer}
           keyExtractor={getDummyId}
+          numColumns={4}
+          columnWrapperStyle={{ flex: 1, justifyContent: "space-evenly", paddingTop: 8 }}
         />
-  
+        
         {
           showURLBtn ? externalURLContent : null
         }

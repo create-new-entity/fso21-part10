@@ -7,6 +7,10 @@ class DetailItemStorage {
     this.namespace = namespace;
   }
 
+  async removeDetailItem() {
+    await AsyncStorage.removeItem(`${this.namespace}:${itemStr}`);
+  }
+
   async setDetailItem(item) {
     await AsyncStorage.setItem(`${this.namespace}:${itemStr}`, JSON.stringify(item));
   }
