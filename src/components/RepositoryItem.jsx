@@ -1,6 +1,6 @@
 import React  from 'react';
 import { useNavigate } from 'react-router-native';
-import { View, Image, StyleSheet, FlatList, Pressable } from 'react-native';
+import { View, Image, StyleSheet, FlatList, Pressable, Linking } from 'react-native';
 
 import Text from './Text';
 import SubDetail from './SubDetail';
@@ -9,6 +9,7 @@ import theme from './../theme';
 
 const max = 1000;
 const takenIds = [];
+
 
 const getDummyId = () => {
   let newId;
@@ -74,13 +75,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const RepositoryItem = ({ item, showURLBtn }) => {
+const RepositoryItem = ({ item, showURLBtn, url }) => {
   const navigate = useNavigate();
 
   const renderSubDetail = ({ item }) => <SubDetail key={item.title} numberDtl={item.numberDtl} title={item.title}/>
   
   const externalURLContent = (
-    <Pressable>
+    <Pressable onPress={() => Linking.openURL(url)}>
       <View style={styles.externalURLContainer}>
         <Text style={styles.externalURLText}>Open in GitHub</Text>
       </View>
