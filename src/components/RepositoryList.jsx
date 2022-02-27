@@ -41,9 +41,9 @@ export const RepositoryListContainer = ({ repositories }) => {
   );
 };
 
-const RepositoryList = () => {
-  const { repositories } = useRepositories();
-
+const RepositoryList = ({repositories}) => {
+  
+  if(!repositories) return null;
 
   return <RepositoryListContainer repositories={repositories} />;
 };

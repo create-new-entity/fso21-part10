@@ -6,6 +6,8 @@ import RepositoryDetail from './RepositoryDetail';
 import SignInContainer from './SignInContainer';
 import AppBar from './AppBar';
 
+import useRepositories from '../hooks/useRepositories';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -15,13 +17,15 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+  const { repositories } = useRepositories();
+
   return (
     <View style={styles.container}>
       <AppBar/>
       <Routes>
         <Route path="/signin" element={<SignInContainer />} exact />
-        <Route path="/detail/:id" element={<RepositoryDetail />} exact/>
-        <Route path="/" element={<RepositoryList />} exact />
+        <Route path="/detail/:id" element={<RepositoryDetail repositories={repositories} />} exact/>
+        <Route path="/" element={<RepositoryList repositories={repositories}/>} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

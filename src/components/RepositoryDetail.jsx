@@ -2,10 +2,8 @@ import React  from 'react';
 import { useParams } from 'react-router-native';
 
 import RepositoryItem from './RepositoryItem';
-import useRepositories from '../hooks/useRepositories';
 
-const RepositoryDetail = () => {
-  const { repositories } = useRepositories();
+const RepositoryDetail = ({ repositories }) => {
   const { id } = useParams();
 
   if(!repositories) return null;
