@@ -31,9 +31,9 @@ const Main = () => {
     <View style={styles.container}>
       <AppBar/>
       <Routes>
-        <Route path="/" element={<RepositoryList />} exact />
         <Route path="/signin" element={<SignInContainer />} exact />
         <Route path="/detail/:id" element={<RepositoryItem item={item} showURLBtn={true}/>} exact/>
+        <Route path="/" element={<RepositoryList />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>
