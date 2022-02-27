@@ -139,12 +139,14 @@ const RepositoryItem = ({ item, showURLBtn }) => {
       await detailItemStorage.setDetailItem(item);
       navigate(`/detail/${item.id}`, { replace: true });
     };
+    
     return (
       <Pressable onPress={handleShowItemDetail}>
         { getContent() }
       </Pressable>
     );
   };
+  
 
   return (
     <>

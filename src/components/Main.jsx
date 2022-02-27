@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Route, Routes, Navigate } from 'react-router-native';
 
@@ -15,10 +16,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const Main = async () => {
+const Main = () => {
+  const [item, setItem] = useState();
   const detailItemStorage = useDetailItemStorage();
-  const item = await detailItemStorage.getDetailItem();
-  console.log('item in Main.jsx', item);
+
+  useEffect(() => {
+    (async () => {
+      const storedItem = await detailItemStorage.getDetailItem();
+      setItem(storedItem);
+    })();
+  }, [detailItemStorage]);
 
   return (
     <View style={styles.container}>
