@@ -1,10 +1,9 @@
 import React  from 'react';
-import { useNavigate, useParams } from 'react-router-native';
+import { useNavigate } from 'react-router-native';
 import { View, Image, StyleSheet, FlatList, Pressable } from 'react-native';
 
 import Text from './Text';
 import SubDetail from './SubDetail';
-import useRepositories from '../hooks/useRepositories';
 
 import theme from './../theme';
 
@@ -77,13 +76,6 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({ item, showURLBtn }) => {
   const navigate = useNavigate();
-  const { repositories } = useRepositories();
-  const { id } = useParams();
-
-  if(showURLBtn){
-    if(!repositories) return null;
-    item = repositories.find(repository => repository.id === id);
-  }
 
   const renderSubDetail = ({ item }) => <SubDetail key={item.title} numberDtl={item.numberDtl} title={item.title}/>
   
