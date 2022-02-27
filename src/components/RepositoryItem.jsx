@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-native';
+import React  from 'react';
+import { useNavigate, useParams } from 'react-router-native';
 import { View, Image, StyleSheet, FlatList, Pressable } from 'react-native';
 
 import Text from './Text';
 import SubDetail from './SubDetail';
-import useDetailItemStorage from './../hooks/useDetailItemStorage.js';
+import useRepositories from '../hooks/useRepositories';
 
 import theme from './../theme';
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
     paddingLeft: 16,
-    paddingRight: 32
+    paddingRight: 40
   },
 
   subHeading: {
@@ -76,21 +76,13 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryItem = ({ item, showURLBtn }) => {
-  const [clickedItem, setClickedItem] = useState();
-  const detailItemStorage = useDetailItemStorage();
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    (async () => {
-      if(!showURLBtn) return;
-      const storedItem = await detailItemStorage.getDetailItem();
-      setClickedItem(storedItem);
-    })();
-  }, [showURLBtn]);
+  const { repositories } = useRepositories();
+  const { id } = useParams();
 
   if(showURLBtn){
-    if(clickedItem) item = clickedItem;
-    else return null;
+    if(!repositories) return null;
+    item = repositories.find(repository => repository.id === id);
   }
 
   const renderSubDetail = ({ item }) => <SubDetail key={item.title} numberDtl={item.numberDtl} title={item.title}/>
@@ -119,7 +111,7 @@ const RepositoryItem = ({ item, showURLBtn }) => {
             <Text
               color='textSecondary'
               fontSize='subheading'
-              numberOfLines={2}
+              numberOfLines={5}
               style={styles.subHeading}
             >{item.description}</Text>
             <Text style={styles.languageTag}>{item.language}</Text>
@@ -144,7 +136,6 @@ const RepositoryItem = ({ item, showURLBtn }) => {
 
   const wrapWithPressable = () => {
     const handleShowItemDetail = async () => {
-      await detailItemStorage.setDetailItem(item);
       navigate(`/detail/${item.id}`, { replace: true });
     };
     
