@@ -10,10 +10,22 @@ const useRepository = ({ id }) => {
 
   const { loading, error, data } = useQuery(GET_REPOSITORY, options);
 
+  const getReview = (edgeNode) => ({
+    createdAt: edgeNode.createdAt,
+    id: edgeNode.id,
+    rating: edgeNode.rating,
+    text: edgeNode.text,
+    user: {
+      id: edgeNode.user.id,
+      username: edgeNode.user.username
+    }
+  });
+
   if(!loading && !error) return {
     id: data.repository.id,
     fullName: data.repository.fullName,
-    url: data.repository.url
+    url: data.repository.url,
+    reviews: data.repository.reviews.edges.map(edge => getReview(edge.node))
   };
 
   return {};
