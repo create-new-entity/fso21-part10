@@ -63,13 +63,10 @@ const CreateReviewPage = () => {
     text: ''
   };
 
-  const requiredErrMsg = 'Field Required!';
-  const rangeErrMsg = 'Enter a number between 0 - 100';
-
   const validationSchema = Yup.object().shape({
-    repositoryName: Yup.string().required(requiredErrMsg),
-    ownerName: Yup.string().required(requiredErrMsg),
-    rating: Yup.number().min(0, rangeErrMsg).max(100, rangeErrMsg),
+    repositoryName: Yup.string().required('Repository name is required'),
+    ownerName: Yup.string().required('Repository owner name is required'),
+    rating: Yup.number().required('Rating is required').min(0, 'Rating between 0 and 100').max(100, 'Rating between 0 and 100'),
     text: Yup.string().notRequired()
   });
 
