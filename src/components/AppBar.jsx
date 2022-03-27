@@ -37,6 +37,7 @@ const AppBar = () => {
   const loggedInContents = () => {
     return (
       <>
+        <AppBarTab tabTitle='Create A Review' onPress={() => navigate('/createReview', { replace: true })}/>
         <AppBarTab tabTitle='Sign Out' onPress={handleSignOut}/>
       </>
     );
