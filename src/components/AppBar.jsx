@@ -29,7 +29,6 @@ const AppBar = () => {
   const notLoggedInContents = () => {
     return (
       <>
-        <AppBarTab tabTitle='Repositories' onPress={() => navigate('/', { replace: true })}/>
         <AppBarTab tabTitle='Sign In' onPress={() => navigate('/signin', { replace: true })}/>
       </>
     );
@@ -38,6 +37,7 @@ const AppBar = () => {
   const loggedInContents = () => {
     return (
       <>
+        <AppBarTab tabTitle='Create A Review' onPress={() => navigate('/createReview', { replace: true })}/>
         <AppBarTab tabTitle='Sign Out' onPress={handleSignOut}/>
       </>
     );
@@ -46,6 +46,7 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
+        <AppBarTab tabTitle='Repositories' onPress={() => navigate('/', { replace: true })}/>
         {
           data && data.me ?
           loggedInContents() : notLoggedInContents()

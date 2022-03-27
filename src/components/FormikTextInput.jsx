@@ -9,6 +9,8 @@ import theme from '../theme';
 const styles = StyleSheet.create({
   errorText: {
     color: theme.colors.error,
+    padding: 8,
+    margin: 8,
     marginTop: 5,
   },
 });
