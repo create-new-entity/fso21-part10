@@ -6,6 +6,7 @@ import RepositoryDetail from './RepositoryDetail';
 import SignInContainer from './SignInContainer';
 import CreateReviewPage from './CreateReviewPage';
 import AppBar from './AppBar';
+import SignUp from './SignUp';
 
 import useRepositories from '../hooks/useRepositories';
 
@@ -25,6 +26,7 @@ const Main = () => {
       <AppBar/>
       <Routes>
         <Route path="/signin" element={<SignInContainer />} exact />
+        <Route path="/signup" element={<SignUp/>} exact/>
         <Route path="/detail/:id" element={<RepositoryDetail repositories={repositories} />} exact/>
         <Route path="/createReview" element={<CreateReviewPage/>} exact/>
         <Route path="/" element={<RepositoryList repositories={repositories}/>} exact />

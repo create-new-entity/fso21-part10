@@ -30,6 +30,7 @@ const AppBar = () => {
     return (
       <>
         <AppBarTab tabTitle='Sign In' onPress={() => navigate('/signin', { replace: true })}/>
+        <AppBarTab tabTitle='Sign Up' onPress={() => navigate('/signup', { replace: true })}/>
       </>
     );
   };
