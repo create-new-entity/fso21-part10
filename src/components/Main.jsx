@@ -1,7 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-native';
-import { Picker } from '@react-native-picker/picker';
 
 import RepositoryList from './RepositoryList';
 import RepositoryDetail from './RepositoryDetail';
@@ -9,8 +7,6 @@ import SignInContainer from './SignInContainer';
 import CreateReviewPage from './CreateReviewPage';
 import AppBar from './AppBar';
 import SignUp from './SignUp';
-
-import useRepositories from '../hooks/useRepositories';
 
 
 const styles = StyleSheet.create({
@@ -21,70 +17,16 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-  const [selectedPicker, setSelectedPicker] = useState('latest_repo');
-  const [order, setOrder] = useState({
-      orderBy: 'CREATED_AT',
-      orderDirection: 'DESC'
-  });
-  const { repositories } = useRepositories(order);
-
-  const pickerOptions = [
-    {
-      label: 'Latest repositories',
-      value: 'latest_repo'
-    }, {
-      label: 'Highest rated repositories',
-      value: 'highest_rated'
-    }, {
-      label: 'Lowest rated repositories',
-      value: 'lowest_rated'
-    },
-  ];
-
-  const handlePickerChange = (itemValue) => {
-    setSelectedPicker(itemValue);
-    switch(itemValue) {
-      case 'latest_repo':
-        setOrder({
-          orderBy: 'CREATED_AT',
-          orderDirection: 'DESC'
-        });
-        break;
-      case 'highest_rated':
-        setOrder({
-          orderBy: 'RATING_AVERAGE',
-          orderDirection: 'DESC'
-        });
-        break;
-      case 'lowest_rated':
-        setOrder({
-          orderBy: 'RATING_AVERAGE',
-          orderDirection: 'ASC'
-        });
-        break;
-      default:
-        console.log('Picker not working');
-    }
-  };
-
-  const getPickerComponent = () => {
-    return <Picker selectedValue={selectedPicker} onValueChange={handlePickerChange}>
-      {
-        pickerOptions.map((option, index) => <Picker.Item key={index} label={option.label} value={option.value}/>)
-      }
-    </Picker>
-  };
-
+  
   return (
     <View style={styles.container}>
       <AppBar/>
-      { getPickerComponent() }
       <Routes>
         <Route path="/signin" element={<SignInContainer />} exact />
         <Route path="/signup" element={<SignUp/>} exact/>
-        <Route path="/detail/:id" element={<RepositoryDetail repositories={repositories} />} exact/>
+        <Route path="/detail/:id" element={<RepositoryDetail/>} exact/>
         <Route path="/createReview" element={<CreateReviewPage/>} exact/>
-        <Route path="/" element={<RepositoryList repositories={repositories}/>} exact />
+        <Route path="/" element={<RepositoryList/>} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

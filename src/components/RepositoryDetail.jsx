@@ -78,8 +78,6 @@ const RepositoryDetail = ({ repositories }) => {
 
   if(!repositories) return null;
 
-  const repoDetails = repositories.find(repository => repository.id === id);
-
   return (
     
     <FlatList
@@ -87,7 +85,7 @@ const RepositoryDetail = ({ repositories }) => {
       renderItem={({ item }) => <ReviewItem review={item} />}
       keyExtractor={({ id }) => id}
       ItemSeparatorComponent={ItemSeparator}
-      ListHeaderComponent={() => <RepositoryItem item={repoDetails} showURLBtn={true} url={result.url}/>}
+      ListHeaderComponent={() => <RepositoryItem item={result} showURLBtn={true} url={result.url}/>}
     />
   );
 };
