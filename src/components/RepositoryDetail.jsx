@@ -72,11 +72,9 @@ const ReviewItem = ({ review }) => {
   );
 };
 
-const RepositoryDetail = ({ repositories }) => {
+const RepositoryDetail = () => {
   const { id } = useParams();
   const result = useRepository({ id });
-
-  if(!repositories) return null;
 
   return (
     

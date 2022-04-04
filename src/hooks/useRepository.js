@@ -25,6 +25,13 @@ const useRepository = ({ id }) => {
     id: data.repository.id,
     fullName: data.repository.fullName,
     url: data.repository.url,
+    description: data.repository.description,
+    language: data.repository.language,
+    forksCount: data.repository.forksCount,
+    stargazersCount: data.repository.stargazersCount,
+    ratingAverage: data.repository.ratingAverage,
+    reviewCount: data.repository.reviewCount,
+    ownerAvatarUrl: data.repository.ownerAvatarUrl,
     reviews: data.repository.reviews.edges.map(edge => getReview(edge.node))
   };
 
