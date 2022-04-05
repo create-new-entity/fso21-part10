@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 export const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, listHeaderComponent }) => {
+export const RepositoryListContainer = ({ repositories, onEndReach, listHeaderComponent }) => {
 
   const renderItem = ({ item }) => {
     const subDetails = [
@@ -42,6 +42,8 @@ export const RepositoryListContainer = ({ repositories, listHeaderComponent }) =
       renderItem={renderItem}
       keyExtractor={item => item.id}
       ListHeaderComponent={listHeaderComponent}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -54,7 +56,7 @@ const RepositoryList = () => {
   });
   const [filterTxt, setFilterTxt] = useState('');
   const [debouncedTxt] = useDebounce(filterTxt, 500);
-  const { repositories } = useRepositories({ ...order, searchKeyword: debouncedTxt });
+  const { repositories, fetchMore } = useRepositories({ first: 8, ...order, searchKeyword: debouncedTxt });
 
   const pickerOptions = [
     {
@@ -112,10 +114,13 @@ const RepositoryList = () => {
     );
   };
 
+  const onEndReach = () => {
+    fetchMore();
+  };
+
   return (
     <>
-
-      <RepositoryListContainer repositories={repositories} listHeaderComponent={getListHeaderComponent()}/>
+      <RepositoryListContainer repositories={repositories} listHeaderComponent={getListHeaderComponent()} onEndReach={onEndReach}/>
     </>
   );
 };
