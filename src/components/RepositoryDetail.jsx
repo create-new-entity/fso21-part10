@@ -74,7 +74,7 @@ const ReviewItem = ({ review }) => {
 
 const RepositoryDetail = () => {
   const { id } = useParams();
-  const { result, fetchMore } = useRepository({ first: 8, id });
+  const { result, fetchMore } = useRepository({ first: 5, id });
   
   return (
     <FlatList

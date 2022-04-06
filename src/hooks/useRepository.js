@@ -22,7 +22,6 @@ const useRepository = (variables) => {
   });
 
   if(!loading && !error) {
-    console.log(data);
     const result = {
       id: data.repository.id,
       fullName: data.repository.fullName,
