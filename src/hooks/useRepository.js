@@ -40,12 +40,6 @@ const useRepository = (variables) => {
     const handleFetchMore = () => {
       const canFetchMore = !loading && data?.repository.reviews.pageInfo.hasNextPage;
 
-      // console.log(data.repository.reviews.pageInfo);
-      // console.log({
-      //   after: data.repository.reviews.pageInfo.endCursor,
-      //   ...variables,
-      // });
-      
       if (!canFetchMore) {
         return;
       }
