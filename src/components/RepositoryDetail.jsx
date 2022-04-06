@@ -1,7 +1,7 @@
 import React  from 'react';
 import { format } from 'date-fns';
-import { useParams } from 'react-router-native';
-import { FlatList, View, StyleSheet, Dimensions } from 'react-native';
+import { useParams, useLocation } from 'react-router-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 
 import { ItemSeparator } from './RepositoryList';
 import Text from './Text';
@@ -9,51 +9,18 @@ import Text from './Text';
 import useRepository from '../hooks/useRepository';
 import RepositoryItem from './RepositoryItem';
 
-import theme from '../theme';
-
-const ratingWidth = 40;
-const parentPadding = 8;
-const windowWidth = Dimensions.get('window').width;
-const reviewDetailsContainerPaddingLeft = 12;
+import { reviewStyles } from '../theme'; './../theme';
 
 const styles = StyleSheet.create({
-  reviewContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    padding: parentPadding,
-    paddingTop: 8,
-    width: windowWidth
-  },
-
-  rating: {
-    width: ratingWidth,
-    height: 40,
-    borderWidth: 2,
-    borderRadius: ratingWidth / 2,
-    borderColor: theme.colors.primary,
-
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  reviewDetailsContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingTop: 2,
-    paddingLeft: reviewDetailsContainerPaddingLeft,
-  },
-
-  detailsText: {
-    width: 0,
-    paddingTop: 2,
-    minWidth: windowWidth - ratingWidth - parentPadding * 2 - reviewDetailsContainerPaddingLeft
-  }
+  reviewContainer: reviewStyles.reviewContainer,
+  rating: reviewStyles.rating,
+  reviewDetailsContainer: reviewStyles.reviewDetailsContainer,
+  detailsText: reviewStyles.detailsText
 });
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review }) => {
+  const location = useLocation();
+
   return (
     <View style={styles.reviewContainer}>
       <View style={styles.rating}>
@@ -61,7 +28,7 @@ const ReviewItem = ({ review }) => {
       </View>
       <View style={styles.reviewDetailsContainer}>
         <Text fontWeight='bold'>
-          { review.user.username }
+          { location?.pathname === '/myreviews' ? review.repository.fullName : review.user.username }
         </Text>
         <Text color='textSecondary'>
           { format(new Date(review.createdAt), 'dd.MM.yyyy') }
