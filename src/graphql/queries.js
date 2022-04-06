@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const ME = gql`
-  query me ($includeReviews: Boolean = false) {
+  query me ($first: Int, $after: String, $includeReviews: Boolean = false) {
     me {
       id
-      reviews @include(if: $includeReviews) {
+      reviews(first: $first, after: $after) @include(if: $includeReviews) {
         pageInfo {
           endCursor
           hasNextPage
