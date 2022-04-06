@@ -36,8 +36,8 @@ export const GET_REPOSITORY = gql`
           }
         }
         pageInfo {
-          hasNextPage
           endCursor
+          hasNextPage
         }
       }
       url
