@@ -74,16 +74,17 @@ const ReviewItem = ({ review }) => {
 
 const RepositoryDetail = () => {
   const { id } = useParams();
-  const result = useRepository({ id });
-
+  const { result, fetchMore } = useRepository({ first: 5, id });
+  
   return (
-    
     <FlatList
-      data={result.reviews}
+      data={result?.reviews}
       renderItem={({ item }) => <ReviewItem review={item} />}
       keyExtractor={({ id }) => id}
       ItemSeparatorComponent={ItemSeparator}
-      ListHeaderComponent={() => <RepositoryItem item={result} showURLBtn={true} url={result.url}/>}
+      ListHeaderComponent={() => result ? <RepositoryItem item={result} showURLBtn={true} url={result.url}/> : null}
+      onEndReached={fetchMore}
+      onEndReachedThreshold={0.5}
     />
   );
 };
