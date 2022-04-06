@@ -1,4 +1,10 @@
-import { Platform } from "react-native";
+import { Platform, Dimensions } from "react-native";
+
+const ratingWidth = 40;
+const parentPadding = 8;
+const windowWidth = Dimensions.get('window').width;
+const reviewDetailsContainerPaddingLeft = 12;
+
 
 const theme = {
   colors: {
@@ -29,6 +35,43 @@ const theme = {
       height: 50,
       borderRadius: 8
     }
+  }
+};
+
+export const reviewStyles = {
+  reviewContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    padding: parentPadding,
+    paddingTop: 8,
+    width: windowWidth
+  },
+
+  rating: {
+    width: ratingWidth,
+    height: 40,
+    borderWidth: 2,
+    borderRadius: ratingWidth / 2,
+    borderColor: theme.colors.primary,
+
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  reviewDetailsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingTop: 2,
+    paddingLeft: reviewDetailsContainerPaddingLeft,
+  },
+
+  detailsText: {
+    width: 0,
+    paddingTop: 2,
+    minWidth: windowWidth - ratingWidth - parentPadding * 2 - reviewDetailsContainerPaddingLeft
   }
 };
 

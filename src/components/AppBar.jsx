@@ -24,6 +24,7 @@ const AppBar = () => {
 
   const handleSignOut = async () => {
     await signOut();
+    navigate('/', { replace: true });
   };
 
   const notLoggedInContents = () => {
@@ -39,6 +40,7 @@ const AppBar = () => {
     return (
       <>
         <AppBarTab tabTitle='Create A Review' onPress={() => navigate('/createReview', { replace: true })}/>
+        <AppBarTab tabTitle='My Reviews' onPress={() => navigate('/myreviews')}/>
         <AppBarTab tabTitle='Sign Out' onPress={handleSignOut}/>
       </>
     );
