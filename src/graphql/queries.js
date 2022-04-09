@@ -21,6 +21,7 @@ export const ME = gql`
                 username
               }
               repository {
+                id
                 fullName
               }
           }
