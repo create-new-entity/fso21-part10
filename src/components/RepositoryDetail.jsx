@@ -1,12 +1,14 @@
 import React  from 'react';
 import { format } from 'date-fns';
-import { useParams, useLocation } from 'react-router-native';
-import { FlatList, View, StyleSheet, Pressable } from 'react-native';
+import { useParams, useLocation, useNavigate } from 'react-router-native';
+import { FlatList, View, StyleSheet, Pressable, Alert } from 'react-native';
 
 import { ItemSeparator } from './RepositoryList';
 import Text from './Text';
 
 import useRepository from '../hooks/useRepository';
+import useDeleteReview from '../hooks/useDeleteReview';
+
 import RepositoryItem from './RepositoryItem';
 
 import theme, { reviewStyles } from '../theme';
@@ -44,15 +46,44 @@ const styles = StyleSheet.create({
 
 export const ReviewItem = ({ review, myreview }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [deleteReview] = useDeleteReview();
+
+  const handleDelete = async () => {
+    try {
+      const deleted = await deleteReview(review.id);
+      deleted ? console.log('Deletion successful') : console.log('Deletion failed');
+    }
+    catch(e) {
+      console.log('Error in handleDelete -> RepositoryDetail');
+    }
+  };
+
+  const handleDeleteReview = () => {
+    Alert.alert(
+      "Delete review",
+      "Are you sure you want to delete this review?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed")
+        },
+        {
+          text: "Delete",
+          onPress: handleDelete
+        }
+      ]
+    );
+  };
 
   const reviewActionComponents = (
     <View style={styles.reviewActionsContainer}>
-      <Pressable onPress={() => console.log('View pressed')}>
+      <Pressable onPress={() => navigate(`/detail/${review.repository.id}`)}>
         <View style={{ ...styles.reviewActionTextContainer, backgroundColor: theme.colors.primary }}>
           <Text style={styles.reviewActionText}>View repository</Text>
         </View>
       </Pressable>
-      <Pressable onPress={() => console.log('Delete pressed')}>
+      <Pressable onPress={handleDeleteReview}>
         <View style={{ ...styles.reviewActionTextContainer, backgroundColor: theme.colors.error }}>
           <Text style={styles.reviewActionText}>Delete review</Text>
         </View>
